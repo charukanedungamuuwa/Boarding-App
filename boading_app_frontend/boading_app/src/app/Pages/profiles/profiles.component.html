@@ -1,0 +1,16 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- ... Your other head elements ... -->
+</head>
+
+<body>
+    <!-- ... Your other body content ... -->
+
+    <!-- Display an image -->
+    <img th:src="@{/api/image/{id}(id=${paymentId})}" alt="Uploaded Image" />
+
+    <!-- ... Your other body content ... -->
+</body>
+
+</html>

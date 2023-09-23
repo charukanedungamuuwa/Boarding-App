@@ -1,0 +1,49 @@
+<app-navbar>
+</app-navbar>
+<div class="bac">
+    <div class="exa">hi&nbsp;{{gotdatas.employeename}}</div>
+
+
+
+    <div class="specialcontainer">
+        <div class="togelcontainer">
+            <mat-slide-toggle class="togel" (change)="saveintheboarding() " [(ngModel)]="p.intheboarding">
+
+
+                <span class="togelheader">In The Boarding</span> </mat-slide-toggle>
+        </div>
+        <div class="togelcontainer">
+            <mat-slide-toggle class="togel" (change)="savekeyholder()" [(ngModel)]="p.keyholder">
+
+
+                <span class="togelheader">Current Key Holder</span> </mat-slide-toggle>
+        </div>
+        <a>
+            <div class="togelcontainer">
+
+                <span class="togelheader" routerLink="/intheboarding">Who are in the boarding?</span>
+            </div>
+        </a>
+
+    </div>
+    <div class="allcards">
+        <button class="card" [routerLink]="['/boardingmates']">
+
+
+        <img src="\assets\Images\boadingmates.png" class="boadingmatesimage"> <span class="cardheading">Boarding Mates</span><span class="discription">(Find All Monthly Payments) </span>
+
+    </button>
+        <button class="card">
+        <img src="\assets\Images\boadingmates.png" class="boadingmatesimage"><span class="cardheading">Boarding Mates</span><span class="discription">(Find All Monthly Payments) </span>
+    </button>
+        <button class="card"><img src="\assets\Images\payments.png" class="boadingmatesimage" [routerLink]="['/payments',gotdatas.employeeid]"><span class="cardheading"> Payements</span>
+    <span class="discription">(Find All Monthly Payments) </span> </button>
+        <button class="card"><img src="\assets\Images\bills.png" class="boadingmatesimage"><span class="cardheading">Bills</span><span class="discription">(Find All Monthly Payments) </span></button>
+        <button class="card"><img src="\assets\Images\notes.png" class="boadingmatesimage"><span class="cardheading">Special Notes</span><span class="discription">(Find All Monthly Payments) </span></button>
+        <button class="card"><img src="\assets\Images\fund.png" class="boadingmatesimage"><span class="cardheading">Boarding Funds</span><span class="discription">(Find All Monthly Payments) </span></button>
+
+
+
+
+    </div>
+</div>

@@ -1,0 +1,223 @@
+            .firsttab {
+                color: blue;
+            }
+            
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            
+            th,
+            td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            
+            th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+            
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+            
+            caption {
+                font-size: 1.5em;
+                margin-bottom: 10px;
+            }
+            
+            .paymentdetail {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                left: 790px;
+                width: 490px;
+                border-style: solid;
+                border-radius: 10%;
+                top: 50px;
+                padding: 20px 20px 20px 20px;
+                font-size: 20px;
+            }
+            
+            .table1 {
+                position: relative;
+                margin-top: 170px;
+            }
+            
+            .buttonchangedetails {
+                width: 140px;
+                position: relative;
+                left: 110px;
+                margin-top: 30px;
+            }
+            
+            .detailsspan {
+                margin-top: 10px;
+                font-weight: bold;
+            }
+            
+            .modaldetails {
+                display: flex;
+                flex-direction: column;
+                height: 300px;
+                position: relative;
+            }
+            
+            .inputfields {
+                left: 50%;
+                position: absolute;
+            }
+            
+            .spanresult {
+                position: absolute;
+                left: 50%;
+            }
+            
+            .tableheader {
+                font-size: 25px;
+                font-weight: bold;
+                position: relative;
+                position: relative;
+                top: 130px;
+                left: 42%;
+            }
+            
+            .monthbuttons:hover {
+                font-weight: bold;
+            }
+            
+            .monthbuttons {
+                height: 120px;
+                width: 120px;
+                border-radius: 20%;
+                font-size: 20px;
+            }
+            
+            .allmonths {
+                position: relative;
+                width: 80%;
+                top: 100px;
+            }
+            
+            .accdetailheading {
+                position: relative;
+                left: 80px;
+                top: 1px;
+                font-size: 25px;
+                margin-bottom: 20px;
+                font-weight: bold;
+            }
+            
+            .priviousmonthpayments {
+                font-size: 25px;
+                font-weight: bold;
+                left: 41%;
+                position: relative;
+                top: 80px;
+            }
+            
+            .hr1 {
+                position: relative;
+                top: 80px;
+            }
+            
+            .priviousmonths {
+                margin-top: 70px;
+                width: 100%;
+            }
+            
+            .table2 {
+                position: relative;
+                margin-top: 150px;
+            }
+            
+            .paymenttotheownerheadding {
+                position: relative;
+                font-size: 25px;
+                font-weight: bold;
+                top: 120px;
+                left: 43%;
+                margin-bottom: 150px;
+            }
+            
+            .ownerhr {
+                position: relative;
+                top: 100px;
+            }
+            
+            .elecheading {
+                position: relative;
+                font-size: 25px;
+                font-weight: bold;
+                left: 44%;
+                top: 50px;
+            }
+            
+            .waterheading {
+                position: relative;
+                font-size: 25px;
+                font-weight: bold;
+                left: 45%;
+                top: 120px;
+            }
+            
+            .electable {
+                margin-top: 100px;
+            }
+            
+            .watertable {
+                margin-top: 180px;
+            }
+            
+            .billhr {
+                position: relative;
+                top: 60px;
+            }
+            
+            .delete {
+                height: 120px;
+            }
+            
+            .addbutton {
+                position: relative;
+                left: 350px;
+                top: 20px;
+            }
+            
+            .modal2 {
+                width: 1200px;
+                position: relative;
+                left: -300px;
+            }
+            
+            .tdcustom {
+                border: none;
+                text-align: right;
+                font-weight: bold;
+            }
+            
+            .total {
+                font-weight: bold;
+            }
+            
+            .matoption {}
+            
+            .selectmonth {
+                width: 170px;
+                height: 24px;
+            }
+            
+            .payment-image {
+                width: 590px;
+                height: 500px;
+                margin: 30px;
+            }
+            
+            .qwe {
+                width: 700px;
+                height: 800px;
+            }

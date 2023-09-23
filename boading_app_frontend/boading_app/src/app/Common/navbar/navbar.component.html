@@ -1,0 +1,28 @@
+<ul class="navbar">
+    <li>
+        <img src="\assets\Images\boadingmates.png" class="navbarlogo"> </li>
+
+    <li><button mat-button class="navbuttons" [routerLink]="['/home']">HOME</button></li>
+    <li><button mat-button class="navbuttons" routerLink="/keyavailable">KEY</button>
+    </li>
+
+    <li><button mat-button class="navbuttons">NOTES</button></li>
+    <li>
+        <div class="demo-section"><button mat-button class="navbuttons">
+
+            <mat-icon matBadge="15" matBadgeColor="warn">home</mat-icon>
+            <!-- Include text description of the icon's meaning for screen-readers -->
+            <span class="cdk-visually-hidden">
+            Example with a home icon with overlaid badge showing the number 15
+          </span>
+        </button>
+        </div>
+    </li>
+    <li>
+        <div class="example-button-container">
+            <button mat-fab color="warn" aria-label="Example icon button with a home icon">
+                  <mat-icon>logout</mat-icon></button>
+
+        </div>
+    </li>
+</ul>

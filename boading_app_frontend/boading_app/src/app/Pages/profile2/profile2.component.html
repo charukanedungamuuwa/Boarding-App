@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <!-- ... Your other head elements ... -->
+</head>
+
+<body>
+    <!-- ... Your other body content ... -->
+
+    <!-- Display an image -->
+    <img src="/api/image/{id}" alt="Uploaded Image" />
+
+    <!-- Download link -->
+    <a th:href="@{/api/image/{id}(id=${paymentId})}" download="image.jpg">Download Image</a>
+
+    <!-- ... Your other body content ... -->
+</body>
+
+</html>

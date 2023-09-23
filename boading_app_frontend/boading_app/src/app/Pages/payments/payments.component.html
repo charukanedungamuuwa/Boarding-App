@@ -1,0 +1,510 @@
+<mat-tab-group>
+    <mat-tab label="boarding Mate Payments" class="firsttab">
+        <!-- <span class="accdetailheading">Account Details</span> -->
+        <div class="paymentdetail" *ngFor="let admin of admindetails">
+            <span class="accdetailheading">Account Details</span>
+            <span class="detailsspan">Account Number<span class="spanresult">:-{{admin.account_Number}}</span></span>
+            <span class="detailsspan">Account Name<span class="spanresult">:-{{admin.account_Name}}</span></span>
+            <span class="detailsspan">Bank<span class="spanresult">:-{{admin.bank}}</span></span>
+            <span class="detailsspan">Branch<span class="spanresult">:-{{admin.branch}}</span></span>
+            <span class="detailsspan">Monthly Payment<span class="spanresult">:-{{admin.monthly_Payment}}</span></span>
+
+            <button (click)="editAdminDetail(admin.id)" type="button" class="btn btn-primary buttonchangedetails" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                change details
+                </button>
+        </div>
+        <hr class="hr1">
+        <div>
+            <span class="tableheader">Current Month Payments</span></div>
+        <table class="table1">
+
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>arrears</th>
+                <th>Slip</th>
+                <th>Month</th>
+                <th>Image</th>
+            </tr>
+
+            <tr *ngIf="isFetching">
+                <td>Loading Data</td>
+            </tr>
+
+            <tr *ngFor="let x of boardingmatepayments">
+
+                <td>{{x.name}}</td>
+                <td>{{x.date}}</td>
+                <td>{{x.amount}}</td>
+                <td>{{x.arrears}}</td>
+                <td>{{x.slip}}</td>
+                <td>{{x.month}}</td>
+                <!-- <td><img *ngIf="x.image" [src]="getImageUrl(x.id)" alt="Payment Slip" class="payment-image"></td> -->
+                <td>
+                    <button type="button" class="btn " (click)="viewImage(x)" data-bs-toggle="modal" data-bs-target="#previewModal">
+                      Click to View
+                    </button>
+                </td>
+
+
+                <button (click)="edit(x.id)" type="button" class="btn btn " data-bs-toggle="modal" data-bs-target="#exampleModal3" [disabled]="!(x.name===name) ">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+
+                <button (click)="removepayments(x.id) " [disabled]="!(x.name===name) "><mat-icon>delete</mat-icon></button>
+
+            </tr>
+            <tr>
+                <td class="tdcustom "></td>
+                <td class="tdcustom ">Total=</td>
+                <td class="total ">{{calculateTotal()}}</td>
+            </tr>
+
+
+            <button type="button" class="btn btn-primary addbutton " data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <mat-icon>add</mat-icon>
+              </button>
+
+
+            <!-- <tr>
+                <td>Jane Smith</td>
+                <td>Designer</td>
+                <td>$70,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+            <tr>
+                <td>Michael Johnson</td>
+                <td>Project Manager</td>
+                <td>$95,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr> -->
+
+
+        </table>
+        <hr class="hr1 ">
+
+        <span class="priviousmonthpayments ">Show Privious Monthly Payments</span>
+        <div class="allmonths " *ngFor="let monthName of allMonths ">
+
+            <button (click)="openMonthModal('monthName')" class="btn monthbuttons " data-bs-toggle="modal" data-bs-target="#months">{{ monthName }}</button>
+
+        </div>
+
+
+
+    </mat-tab>
+    <mat-tab label="Payment to the owner ">
+        <div class="paymentdetail ">
+            <span class="accdetailheading ">Account Details</span>
+            <span class="detailsspan ">Account Number<span class="spanresult ">:-232222</span></span>
+            <span class="detailsspan ">Account Name<span class="spanresult ">:-Kithmal Banuka</span></span>
+            <span class="detailsspan ">Bank<span class="spanresult ">:-Boc</span></span>
+            <span class="detailsspan ">Branch<span class="spanresult ">:-Katubedda</span></span>
+            <span class="detailsspan ">Monthly Payment<span class="spanresult ">:-Rs.75000</span></span>
+
+            <button type="button " class="btn btn-primary buttonchangedetails " data-bs-toggle="modal " data-bs-target="#staticBackdrop ">
+                change details
+              </button>
+        </div>
+        <hr class="ownerhr ">
+        <div><span class="paymenttotheownerheadding ">Monthly Payments</span></div>
+        <table class="table2 ">
+
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Amount to pay</th>
+                <th>Arrears</th>
+                <th>Slip</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+                <td>John Doe</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+                <button><mat-icon>edit</mat-icon></button>
+                <button><mat-icon>delete</mat-icon></button>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Designer</td>
+                <td>$70,000</td>
+                <td>John Doe</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+            <tr>
+                <td>Michael Johnson</td>
+                <td>Project Manager</td>
+                <td>$95,000</td>
+                <td>John Doe</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+        </table>
+    </mat-tab>
+    <mat-tab label="Bill Payments ">
+        <span class="elecheading ">Electricity Bills</span>
+        <table class="electable ">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Arrears</th>
+                <th>Monthly Bill</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+                <button><mat-icon>edit</mat-icon></button>
+                <button><mat-icon>delete</mat-icon></button>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Designer</td>
+                <td>$70,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+            <tr>
+                <td>Michael Johnson</td>
+                <td>Project Manager</td>
+                <td>$95,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+        </table>
+
+        <hr class="billhr ">
+        <span class="waterheading ">Water Bills</span>
+        <table class="watertable ">
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Arrears</th>
+                <th>Monthly Bill</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+                <button><mat-icon>edit</mat-icon></button>
+                <button><mat-icon>delete</mat-icon></button>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Designer</td>
+                <td>$70,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+            <tr>
+                <td>Michael Johnson</td>
+                <td>Project Manager</td>
+                <td>$95,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+
+            </tr>
+            <tr>
+                <td>Michael Johnson</td>
+                <td>Project Manager</td>
+                <td>$95,000</td>
+                <td>Software Developer</td>
+                <td>$85,000</td>
+            </tr>
+        </table>
+    </mat-tab>
+</mat-tab-group>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade " id="staticBackdrop" data-bs-keyboard="false " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
+    <div class="modal-dialog ">
+        <div class="modal-content ">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5 " id="staticBackdropLabel">Modal title</h1>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <div class="modal-body modaldetails ">
+
+                <span class="detailsspan ">Account Number:-<input type="text " class="inputfields " [(ngModel)]="adminAccountToUpdate.account_Number "></span>
+                <span class="detailsspan ">Account Name:-<input type="text " class="inputfields "[(ngModel)]="adminAccountToUpdate.account_Name "></span>
+                <span class="detailsspan ">Bank:-<input type="text " class="inputfields "[(ngModel)]="adminAccountToUpdate.bank "></span>
+                <span class="detailsspan ">Branch:-<input type="text " class="inputfields "[(ngModel)]="adminAccountToUpdate.branch "></span>
+                <span class="detailsspan ">Monthly Payment:-<input type="text " class="inputfields "[(ngModel)]="adminAccountToUpdate.monthly_Payment "></span>
+
+                <!-- <input type="text " [(ngModel)]="paymentToUpdate.name "></td> -->
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">Discard</button>
+                <button type="button " class="btn btn-primary " (click)="updateadminaccountdetails() ">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ssss -->
+
+
+<!-- Modal crate-->
+<div class="modal fade " id="exampleModal" tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog ">
+        <div class="modal-content modal2 ">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5 " id="exampleModalLabel ">Modal title</h1>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <div class="modal-body ">
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>arrears</th>
+                    <th>Slip</th>
+                    <th>Month</th>
+                    <th>Image</th>
+                </tr>
+                <tr>
+
+
+
+
+
+
+
+
+                    <td>
+                        <input type="text " [(ngModel)]="name " [disabled]="true "></td>
+                    <td><input type="text " [(ngModel)]="date "></td>
+                    <!-- <td>
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker ">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker "></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </td> -->
+                    <td><input type="text " [(ngModel)]="amount "></td>
+                    <td><input type="text " [(ngModel)]="arrears "></td>
+                    <td>
+                        <input type="text " [(ngModel)]="slip "></td>
+
+                    <!-- <td>
+                        <input type="file " (change)="onFileSelected($event) " accept=".jpg,.png,.jpeg " />
+                    </td> -->
+                    <!-- <td>
+                        <input type="text " placeholder="Pick one " aria-label="Number " matInput [matAutocomplete]="auto ">
+                        <mat-autocomplete #auto="matAutocomplete ">
+                            <mat-option class="matoption " *ngFor="let option of options " [value]="option ">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </td> -->
+                    <td>
+                        <select class="selectmonth " name=" " id=" " [(ngModel)]="month ">
+                            <option *ngFor="let monthName of allMonths " [value]="monthName ">{{ monthName }}</option>
+<!-- <option value="january ">january</option>
+<option value="fabruary ">fabruary</option>
+<option value="march ">march</option>
+<option value="april ">april</option> -->
+
+                        </select>
+
+
+                    </td>
+                    <td><input type="file" accept=".jpg,.png,.jpeg " (change)="onImageSelected($event) "></td>
+                </tr>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">Close</button>
+                <button type="submit " class="btn btn-primary " (click)="addPayments() ">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal update -->
+<div class="modal fade " id="exampleModal3" tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog ">
+        <div class="modal-content modal2 ">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5 " id="exampleModalLabel ">Modal title</h1>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <div class="modal-body ">
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>arrears</th>
+                    <th>Slip</th>
+                    <th>Month</th>
+                </tr>
+                <tr>
+
+
+
+
+                    <td>
+                        <input type="text " [(ngModel)]="paymentToUpdate.name "></td>
+                    <td><input type="text " [(ngModel)]="paymentToUpdate.date "></td>
+                    <td><input type="text " [(ngModel)]="paymentToUpdate.amount "></td>
+                    <td><input type="text " [(ngModel)]="paymentToUpdate.arrears "></td>
+                    <td>
+                        <input type="text " [(ngModel)]="paymentToUpdate.slip "></td>
+                    <td><select class="selectmonth " name=" " id=" " [(ngModel)]="paymentToUpdate.month ">
+                        <option *ngFor="let monthName of allMonths " [value]="monthName ">{{ monthName }}</option>
+
+
+                    </select></td>
+                </tr>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">Close</button>
+                <button type="submit " class="btn btn-primary " (click)="updatePayment() ">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal see the picture-->
+<div class="modal fade " id="previewModal" tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog ">
+        <div class="modal-content qwe ">
+            <div class="modal-header ">
+                <h5 class="modal-title " id="exampleModalLabel">Modal title</h5>
+                <button type="button " class="btn-close " data-mdb-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <div class="modal-body modalpi "><img *ngIf="selectedPayment && selectedPayment.image " [src]="getImageUrl(selectedPayment.id) " alt="Payment Slip " class="payment-image "></div>
+            <div class="modal-footer ">
+                <!-- <button type="button " class="btn btn-secondary " data-mdb-dismiss="modal ">Close</button> -->
+                <button type="button " class="btn btn-secondary " data-bs-dismiss="modal " (click)="clearSelectedPayment() ">Close</button>
+                <button type="button " class="btn btn-primary ">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //////overrrr -->
+<table class="table3">
+
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>arrears</th>
+        <th>Slip</th>
+        <th>Month</th>
+        <th>Image</th>
+    </tr>
+
+    <tr *ngIf="isFetching">
+        <td>Loading Data</td>
+    </tr>
+
+    <tr *ngFor="let x of boardingmatepayments">
+
+        <td>{{x.name}}</td>
+        <td>{{x.date}}</td>
+        <td>{{x.amount}}</td>
+        <td>{{x.arrears}}</td>
+        <td>{{x.slip}}</td>
+        <td>{{x.month}}</td>
+        <!-- <td><img *ngIf="x.image" [src]="getImageUrl(x.id)" alt="Payment Slip" class="payment-image"></td> -->
+        <td>
+            <button type="button" class="btn " (click)="viewImage(x)" data-bs-toggle="modal" data-bs-target="#previewModal">
+              Click to View
+            </button>
+        </td>
+
+
+        <button (click)="edit(x.id)" type="button" class="btn btn " data-bs-toggle="modal" data-bs-target="#exampleModal3" [disabled]="!(x.name===name) ">
+            <mat-icon>edit</mat-icon>
+          </button>
+
+        <button (click)="removepayments(x.id) " [disabled]="!(x.name===name) "><mat-icon>delete</mat-icon></button>
+
+    </tr>
+    <tr>
+        <td class="tdcustom "></td>
+        <td class="tdcustom ">Total=</td>
+        <td class="total ">{{calculateTotal()}}</td>
+    </tr>
+
+
+    <button type="button" class="btn btn-primary addbutton " data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <mat-icon>add</mat-icon>
+      </button>
+
+
+    <!-- <tr>
+        <td>Jane Smith</td>
+        <td>Designer</td>
+        <td>$70,000</td>
+        <td>Software Developer</td>
+        <td>$85,000</td>
+    </tr>
+    <tr>
+        <td>Michael Johnson</td>
+        <td>Project Manager</td>
+        <td>$95,000</td>
+        <td>Software Developer</td>
+        <td>$85,000</td>
+    </tr> -->
+
+
+</table>
+<!-- modal for the months -->
+<div class="modal fade " id="months" tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog ">
+        <div class="modal-content modal2 ">
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5 " id="exampleModalLabel ">Modal title</h1>
+                <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+            </div>
+            <div class="modal-body ">
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>arrears</th>
+                    <th>Slip</th>
+                    <th>Month</th>
+                    <th>Image</th>
+                </tr>
+                <tr *ngFor="let x of boardingmatepayments">
+
+                    <td>{{x.name}}</td>
+                    <td>{{x.date}}</td>
+                    <td>{{x.amount}}</td>
+                    <td>{{x.arrears}}</td>
+                    <td>{{x.slip}}</td>
+                    <td>{{x.month}}</td>
+                    <!-- <td><img *ngIf="x.image" [src]="getImageUrl(x.id)" alt="Payment Slip" class="payment-image"></td> -->
+                    <td>
+                        <button type="button" class="btn " (click)="viewImage(x)" data-bs-toggle="modal" data-bs-target="#previewModal">
+                          Click to View
+                        </button>
+                    </td>
+            </div>
+            <div class="modal-footer ">
+                <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">Close</button>
+                <button type="submit " class="btn btn-primary " (click)="updatePayment() ">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

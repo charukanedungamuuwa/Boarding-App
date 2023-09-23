@@ -1,0 +1,27 @@
+<table class="table1">
+
+    <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>arrears</th>
+        <th>Slip</th>
+        <th>Month</th>
+    </tr>
+
+
+
+    <tr *ngFor="let x of boardingmatepayments">
+
+        <td>{{x.name}}</td>
+        <td>{{x.date}}</td>
+        <td>{{x.amount}}</td>
+        <td>{{x.arrears}}</td>
+        <td>{{x.slip}}</td>
+        <td>{{x.month}}</td>
+
+
+
+
+    </tr>
+</table>

@@ -1,0 +1,29 @@
+.navbarlogo {
+    width: 150px;
+    height: 60px;
+    position: relative;
+    left: -90px;
+    margin-right: 760px;
+    margin-left: 40px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #028b66;
+    font-size: 30px;
+    color: aliceblue;
+    flex-flow: wrap;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.navbuttons {
+    font-size: 17px;
+}
+
+.navbuttons:hover {
+    font-weight: bold;
+}
