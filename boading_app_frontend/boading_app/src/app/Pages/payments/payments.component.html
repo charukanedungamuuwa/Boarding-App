@@ -32,7 +32,7 @@
                 <td>Loading Data</td>
             </tr>
 
-            <tr *ngFor="let x of boardingmatepayments">
+            <tr *ngFor="let x of filteredPayments">
 
                 <td>{{x.name}}</td>
                 <td>{{x.date}}</td>
@@ -59,6 +59,7 @@
                 <td class="tdcustom "></td>
                 <td class="tdcustom ">Total=</td>
                 <td class="total ">{{calculateTotal()}}</td>
+                <td class="total ">{{calculateArr()}}</td>
             </tr>
 
 
@@ -84,12 +85,20 @@
 
 
         </table>
+
+        <h2>Employees Not paid yet</h2>
+        <ul>
+            <li *ngFor="let employee of getEmployeesWithoutPayment()">
+                {{ employee.employeename }}
+            </li>
+        </ul>
         <hr class="hr1 ">
 
         <span class="priviousmonthpayments ">Show Privious Monthly Payments</span>
         <div class="allmonths " *ngFor="let monthName of allMonths ">
 
-            <button (click)="openMonthModal('monthName')" class="btn monthbuttons " data-bs-toggle="modal" data-bs-target="#months">{{ monthName }}</button>
+            <!-- <button (click)="openMonthModal('monthName')" class="btn monthbuttons " data-bs-toggle="modal" data-bs-target="#months">{{ monthName }}</button> -->
+            <button [routerLink]="['/month' ,monthName]" class=" monthbuttons ">{{ monthName }}</button>
 
         </div>
 
@@ -236,7 +245,7 @@
     <div class="modal-dialog ">
         <div class="modal-content ">
             <div class="modal-header ">
-                <h1 class="modal-title fs-5 " id="staticBackdropLabel">Modal title</h1>
+                <h1 class="modal-title fs-5 " id="staticBackdropLabel ">Modal title</h1>
                 <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
             </div>
             <div class="modal-body modaldetails ">
@@ -317,10 +326,7 @@
                     <td>
                         <select class="selectmonth " name=" " id=" " [(ngModel)]="month ">
                             <option *ngFor="let monthName of allMonths " [value]="monthName ">{{ monthName }}</option>
-<!-- <option value="january ">january</option>
-<option value="fabruary ">fabruary</option>
-<option value="march ">march</option>
-<option value="april ">april</option> -->
+
 
                         </select>
 
@@ -386,7 +392,7 @@
     <div class="modal-dialog ">
         <div class="modal-content qwe ">
             <div class="modal-header ">
-                <h5 class="modal-title " id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title " id="exampleModalLabel ">Modal title</h5>
                 <button type="button " class="btn-close " data-mdb-dismiss="modal " aria-label="Close "></button>
             </div>
             <div class="modal-body modalpi "><img *ngIf="selectedPayment && selectedPayment.image " [src]="getImageUrl(selectedPayment.id) " alt="Payment Slip " class="payment-image "></div>
@@ -400,7 +406,7 @@
 </div>
 
 <!-- //////overrrr -->
-<table class="table3">
+<table class="table3 ">
 
     <tr>
         <th>Name</th>
@@ -412,11 +418,11 @@
         <th>Image</th>
     </tr>
 
-    <tr *ngIf="isFetching">
+    <tr *ngIf="isFetching ">
         <td>Loading Data</td>
     </tr>
 
-    <tr *ngFor="let x of boardingmatepayments">
+    <tr *ngFor="let x of boardingmatepayments ">
 
         <td>{{x.name}}</td>
         <td>{{x.date}}</td>
@@ -424,15 +430,15 @@
         <td>{{x.arrears}}</td>
         <td>{{x.slip}}</td>
         <td>{{x.month}}</td>
-        <!-- <td><img *ngIf="x.image" [src]="getImageUrl(x.id)" alt="Payment Slip" class="payment-image"></td> -->
+        <!-- <td><img *ngIf="x.image " [src]="getImageUrl(x.id) " alt="Payment Slip " class="payment-image "></td> -->
         <td>
-            <button type="button" class="btn " (click)="viewImage(x)" data-bs-toggle="modal" data-bs-target="#previewModal">
+            <button type="button " class="btn " (click)="viewImage(x) " data-bs-toggle="modal " data-bs-target="#previewModal ">
               Click to View
             </button>
         </td>
 
 
-        <button (click)="edit(x.id)" type="button" class="btn btn " data-bs-toggle="modal" data-bs-target="#exampleModal3" [disabled]="!(x.name===name) ">
+        <button (click)="edit(x.id) " type="button " class="btn btn " data-bs-toggle="modal " data-bs-target="#exampleModal3 " [disabled]="!(x.name===name) ">
             <mat-icon>edit</mat-icon>
           </button>
 
@@ -446,7 +452,7 @@
     </tr>
 
 
-    <button type="button" class="btn btn-primary addbutton " data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button " class="btn btn-primary addbutton " data-bs-toggle="modal " data-bs-target="#exampleModal ">
         <mat-icon>add</mat-icon>
       </button>
 
@@ -469,7 +475,7 @@
 
 </table>
 <!-- modal for the months -->
-<div class="modal fade " id="months" tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+<div class="modal fade " id="months " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
     <div class="modal-dialog ">
         <div class="modal-content modal2 ">
             <div class="modal-header ">
@@ -486,7 +492,7 @@
                     <th>Month</th>
                     <th>Image</th>
                 </tr>
-                <tr *ngFor="let x of boardingmatepayments">
+                <tr *ngFor="let x of boardingmatepayments ">
 
                     <td>{{x.name}}</td>
                     <td>{{x.date}}</td>
@@ -494,9 +500,9 @@
                     <td>{{x.arrears}}</td>
                     <td>{{x.slip}}</td>
                     <td>{{x.month}}</td>
-                    <!-- <td><img *ngIf="x.image" [src]="getImageUrl(x.id)" alt="Payment Slip" class="payment-image"></td> -->
+                    <!-- <td><img *ngIf="x.image " [src]="getImageUrl(x.id) " alt="Payment Slip " class="payment-image "></td> -->
                     <td>
-                        <button type="button" class="btn " (click)="viewImage(x)" data-bs-toggle="modal" data-bs-target="#previewModal">
+                        <button type="button " class="btn " (click)="viewImage(x) " data-bs-toggle="modal " data-bs-target="#previewModal ">
                           Click to View
                         </button>
                     </td>

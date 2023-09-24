@@ -35,7 +35,8 @@ export class PaymentsComponent implements OnInit {
   selectedImage: File | undefined;
   selectedPayment: any;
   // isButtonDisabled: any;
-  
+  filteredPayments: any;
+  employees:any;
   
   
 
@@ -45,12 +46,26 @@ export class PaymentsComponent implements OnInit {
  ]
   q: any = {};
 message:any;
+  
  
   constructor(private service:PaymentService,private datePipe: DatePipe,private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {   
     this.isFetching=true;
-   this.service.getpayments().subscribe(data=>this.boardingmatepayments=data);
+     // Get the current month and year
+     const currentDate = new Date();
+     const currentMonth = this.datePipe.transform(currentDate, 'MMMM');
+     const currentYear = this.datePipe.transform(currentDate, 'yyyy');
+     const currentMonthYear = `${currentMonth} ${currentYear}`;
+
+   this.service.getpayments().subscribe(data=>{this.boardingmatepayments=data;
+    this.filteredPayments = this.boardingmatepayments.filter(
+      (payment: { month: string }) => payment.month === currentMonth
+    );
+    this.isFetching=false;
+  });
+    // Filter the data to include only the current month
+  
    this.isFetching=false;
    this.getadmindetails();
    this.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm');
@@ -58,7 +73,9 @@ message:any;
     const userId = this.route.snapshot.params['userId'];
     this.fetchUserData(userId);
   // this.service.adminaccount().subscribe(data=>this.admindetails=data);
-   
+  this.getEmployees().subscribe(data => {
+    this.employees = data;
+  });
    
   }
 
@@ -66,10 +83,18 @@ message:any;
   calculateTotal(): number {
     let total = 0;
     
-    for (const payment of this.boardingmatepayments) {
+    for (const payment of this.filteredPayments) {
       total += payment.amount;
     }
     return total;
+  }
+  calculateArr(): number {
+    let arr = 0;
+    
+    for (const payment of this.filteredPayments) {
+      arr+= payment.arrears;
+    }
+    return arr;
   }
   
   public addPayments(){
@@ -133,6 +158,24 @@ message:any;
     this.service.adminaccountupdate(this.adminAccountToUpdate).subscribe(()=>{
       alert(' updated successfully');
     })
+  }
+  getEmployees(){
+
+    return this.http.get("http://localhost:8082/api/v1/employee/all");
+     }
+  getEmployeesWithoutPayment() {
+    if (!this.employees || !this.filteredPayments) {
+      return [];
+    }
+  
+    const employeesWithPayment = this.filteredPayments.map((payment: { name: any; }) => payment.name);
+  
+    // Filter out employees who didn't make a payment in the specified month
+    const employeesWithoutPayment = this.employees.filter((employee: { employeename: any; }) => {
+      return !employeesWithPayment.includes(employee.employeename);
+    });
+  
+    return employeesWithoutPayment;
   }
 
 

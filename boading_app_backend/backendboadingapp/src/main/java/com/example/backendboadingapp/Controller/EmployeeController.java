@@ -3,6 +3,7 @@ package com.example.backendboadingapp.Controller;
 import com.example.backendboadingapp.DTO.EmployeeDTO;
 import com.example.backendboadingapp.DTO.LoginDTO;
 import com.example.backendboadingapp.Entity.Employee;
+import com.example.backendboadingapp.Entity.StatusEntity;
 import com.example.backendboadingapp.Response.LoginMesage;
 import com.example.backendboadingapp.Services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,11 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping("/all")
+    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
+        List<EmployeeDTO> employees = employeeService.getAllEmployees();
+        return ResponseEntity.ok(employees);
+    }
+
 
 }

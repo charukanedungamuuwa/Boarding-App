@@ -27,7 +27,9 @@ const routes: Routes = [
  {path:'keyavailable',component:KeyAvailableComponent},
 {path:'a',component:Test2Component},
 {path: 'home/:id',component: HomeComponent},
-{path: 'register',component: RegisterComponent,}
+{path: 'register',component: RegisterComponent},
+{path:'month/:monthName',component:MonthsComponent}
+
 ];
 
 @NgModule({
