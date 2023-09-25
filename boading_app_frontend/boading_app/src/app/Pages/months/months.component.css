@@ -216,3 +216,52 @@ caption {
     width: 170px;
     height: 24px;
 }
+
+.employees {
+    width: 5px;
+    height: 5px;
+    position: absolute;
+    display: flex;
+    column-gap: 30px;
+    left: 400px;
+    top: 80px;
+}
+
+.employeenotpaid {
+    position: relative;
+    top: 90px;
+}
+
+.prmonth {
+    position: relative;
+    top: 320px;
+}
+
+.hr2 {
+    position: relative;
+    top: 80px;
+}
+
+.empimg {
+    height: 120px;
+    width: 120px;
+}
+
+.notpaidword {
+    position: relative;
+    text-align: center;
+}
+
+.employeename {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.monthname {
+    position: relative;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    top: 100px;
+}

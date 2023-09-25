@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-boarding-mates',
@@ -6,77 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./boarding-mates.component.css']
 })
 export class BoardingMatesComponent implements OnInit {
-  books = [
-    {
-      id: 1,
-      empImage:"/assets/images/bills.png" ,
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'rathnapura'
-    
-      
-    },
-    {
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\s.jpg',
-          
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },{
-      id: 2,
-      empImage: '\assets\Images\sinna.jpg',
-      name: 'kusal perera',
-      mobilenumber: '077-4674870',
-      address: 'balangoda'
-    },
-    // Add more book entries here...
-  ];
-  constructor() { }
+
+  employees:any;
+ 
+  constructor(private http: HttpClient,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getEmployees().subscribe(data => {
+      this.employees = data;
+      console.log(this.employees);
+    });
   }
 
+
+
+
+  getEmployees(){
+
+    return this.http.get("http://localhost:8082/api/v1/employee/all");
+     }
 }

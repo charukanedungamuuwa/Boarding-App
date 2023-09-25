@@ -167,7 +167,7 @@ message:any;
     if (!this.employees || !this.filteredPayments) {
       return [];
     }
-  
+
     const employeesWithPayment = this.filteredPayments.map((payment: { name: any; }) => payment.name);
   
     // Filter out employees who didn't make a payment in the specified month

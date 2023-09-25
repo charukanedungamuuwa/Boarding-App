@@ -1,3 +1,4 @@
+<div class="monthname">Payment Details of &nbsp; {{monthName}}</div>
 <table class="table1">
 
     <tr>
@@ -33,12 +34,22 @@
         <td class="total ">{{calculateArr()}}</td>
     </tr>
 </table>
-<h2>Employees Without Payment for Current Month</h2>
+<!-- <h2>Employees Without Payment for Current Month</h2>
 <ul>
     <li *ngFor="let employee of getEmployeesWithoutPayment()">
         {{ employee.employeename }}
     </li>
-</ul>
+</ul> -->
+<div class="employeenotpaid">
+    <span class="notpaidword">
+    <h2>Employees Not paid yet</h2></span>
+    <div class="employees">
+        <div *ngFor="let employee of getEmployeesWithoutPayment()">
+            <img class="empimg" src="\assets\Images\uuu.png">
+            <div class="employeename">{{ employee.employeename }}</div>
+        </div>
+    </div>
+</div>
 <div class="modal fade " id="previewModal" tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
     <div class="modal-dialog ">
         <div class="modal-content qwe ">

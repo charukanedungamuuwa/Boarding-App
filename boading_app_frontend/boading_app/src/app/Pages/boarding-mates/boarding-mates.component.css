@@ -246,3 +246,11 @@ top: 575.03px; */
     left: 180px;
     color: #FF6347;
 }
+
+.allmates {
+    font-weight: bold;
+    font-size: 40px;
+    position: relative;
+    text-align: center;
+    top: 40px;
+}

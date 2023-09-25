@@ -1,6 +1,6 @@
 <mat-tab-group>
-    <mat-tab label="boarding Mate Payments" class="firsttab">
-        <!-- <span class="accdetailheading">Account Details</span> -->
+    <mat-tab label="boarding Mate " class="firsttab">
+
         <div class="paymentdetail" *ngFor="let admin of admindetails">
             <span class="accdetailheading">Account Details</span>
             <span class="detailsspan">Account Number<span class="spanresult">:-{{admin.account_Number}}</span></span>
@@ -13,7 +13,7 @@
                 change details
                 </button>
         </div>
-        <hr class="hr1">
+        <hr class="hr2">
         <div>
             <span class="tableheader">Current Month Payments</span></div>
         <table class="table1">
@@ -40,7 +40,7 @@
                 <td>{{x.arrears}}</td>
                 <td>{{x.slip}}</td>
                 <td>{{x.month}}</td>
-                <!-- <td><img *ngIf="x.image" [src]="getImageUrl(x.id)" alt="Payment Slip" class="payment-image"></td> -->
+
                 <td>
                     <button type="button" class="btn " (click)="viewImage(x)" data-bs-toggle="modal" data-bs-target="#previewModal">
                       Click to View
@@ -68,38 +68,38 @@
               </button>
 
 
-            <!-- <tr>
-                <td>Jane Smith</td>
-                <td>Designer</td>
-                <td>$70,000</td>
-                <td>Software Developer</td>
-                <td>$85,000</td>
-            </tr>
-            <tr>
-                <td>Michael Johnson</td>
-                <td>Project Manager</td>
-                <td>$95,000</td>
-                <td>Software Developer</td>
-                <td>$85,000</td>
-            </tr> -->
 
 
         </table>
 
-        <h2>Employees Not paid yet</h2>
+        <!-- <h2>Employees Not paid yet</h2>
         <ul>
             <li *ngFor="let employee of getEmployeesWithoutPayment()">
                 {{ employee.employeename }}
             </li>
-        </ul>
+        </ul> -->
+
+        <div class="employeenotpaid">
+            <span class="notpaidword">
+            <h2>Employees Not paid yet</h2></span>
+            <div class="employees">
+                <div *ngFor="let employee of getEmployeesWithoutPayment()">
+                    <img class="empimg" src="\assets\Images\uuu.png">
+                    <div class="employeename">{{ employee.employeename }}</div>
+                </div>
+            </div>
+        </div>
+
         <hr class="hr1 ">
+        <div class="prmonth">
+            <span class="priviousmonthpayments ">Show Privious Monthly Payments</span>
+            <div class="allmonths">
+                <div *ngFor="let monthName of allMonths ">
 
-        <span class="priviousmonthpayments ">Show Privious Monthly Payments</span>
-        <div class="allmonths " *ngFor="let monthName of allMonths ">
 
-            <!-- <button (click)="openMonthModal('monthName')" class="btn monthbuttons " data-bs-toggle="modal" data-bs-target="#months">{{ monthName }}</button> -->
-            <button [routerLink]="['/month' ,monthName]" class=" monthbuttons ">{{ monthName }}</button>
-
+                    <button [routerLink]="['/month' ,monthName]" class=" monthbuttons ">{{ monthName }}</button>
+                </div>
+            </div>
         </div>
 
 
@@ -405,75 +405,7 @@
     </div>
 </div>
 
-<!-- //////overrrr -->
-<table class="table3 ">
 
-    <tr>
-        <th>Name</th>
-        <th>Date</th>
-        <th>Amount</th>
-        <th>arrears</th>
-        <th>Slip</th>
-        <th>Month</th>
-        <th>Image</th>
-    </tr>
-
-    <tr *ngIf="isFetching ">
-        <td>Loading Data</td>
-    </tr>
-
-    <tr *ngFor="let x of boardingmatepayments ">
-
-        <td>{{x.name}}</td>
-        <td>{{x.date}}</td>
-        <td>{{x.amount}}</td>
-        <td>{{x.arrears}}</td>
-        <td>{{x.slip}}</td>
-        <td>{{x.month}}</td>
-        <!-- <td><img *ngIf="x.image " [src]="getImageUrl(x.id) " alt="Payment Slip " class="payment-image "></td> -->
-        <td>
-            <button type="button " class="btn " (click)="viewImage(x) " data-bs-toggle="modal " data-bs-target="#previewModal ">
-              Click to View
-            </button>
-        </td>
-
-
-        <button (click)="edit(x.id) " type="button " class="btn btn " data-bs-toggle="modal " data-bs-target="#exampleModal3 " [disabled]="!(x.name===name) ">
-            <mat-icon>edit</mat-icon>
-          </button>
-
-        <button (click)="removepayments(x.id) " [disabled]="!(x.name===name) "><mat-icon>delete</mat-icon></button>
-
-    </tr>
-    <tr>
-        <td class="tdcustom "></td>
-        <td class="tdcustom ">Total=</td>
-        <td class="total ">{{calculateTotal()}}</td>
-    </tr>
-
-
-    <button type="button " class="btn btn-primary addbutton " data-bs-toggle="modal " data-bs-target="#exampleModal ">
-        <mat-icon>add</mat-icon>
-      </button>
-
-
-    <!-- <tr>
-        <td>Jane Smith</td>
-        <td>Designer</td>
-        <td>$70,000</td>
-        <td>Software Developer</td>
-        <td>$85,000</td>
-    </tr>
-    <tr>
-        <td>Michael Johnson</td>
-        <td>Project Manager</td>
-        <td>$95,000</td>
-        <td>Software Developer</td>
-        <td>$85,000</td>
-    </tr> -->
-
-
-</table>
 <!-- modal for the months -->
 <div class="modal fade " id="months " tabindex="-1 " aria-labelledby="exampleModalLabel " aria-hidden="true ">
     <div class="modal-dialog ">
@@ -514,3 +446,5 @@
         </div>
     </div>
 </div>
+
+<br><br><br><br><br><br><br><br>
