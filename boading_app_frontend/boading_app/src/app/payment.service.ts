@@ -23,6 +23,10 @@ export class PaymentService {
    
     return this.http.post("http://localhost:8082/api/save",paymentdata);
 }
+saveownerpayments(paymentdata:any){
+   
+  return this.http.post("http://localhost:8082/api/saveowner",paymentdata);
+}
 
 deletepayments( id:any){
   return this.http.delete(`http://localhost:8082/api/delete/${id}`);
@@ -34,10 +38,17 @@ updatepayment(payment: any) {
 adminaccount(){
   return this.http.get("http://localhost:8082/admin/getall");
 }
+owneraccount(){
+  return this.http.get("http://localhost:8082/owner/getowner");
+}
 
 adminaccountupdate(adminaccount:any)
 {
   return this.http.put(`http://localhost:8082/admin/update/${adminaccount.id}`,adminaccount);
+}
+owneraccountupdate(owneraccount:any)
+{
+  return this.http.put(`http://localhost:8082/owner/updateowner/${owneraccount.id}`,owneraccount);
 }
 saveadminaccount(p:any){
    

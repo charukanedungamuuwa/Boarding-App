@@ -23,8 +23,10 @@ export class PaymentsComponent implements OnInit {
   id:any;
   paymentToUpdate: any = {};
   admindetails:any;
+  ownerdetails:any;
   Account_Number:any;
   adminAccountToUpdate:any={};
+  ownerAccountToUpdate:any={};
   monthly_Payment:any;
   accountName:any;
   // currentDateTime = new Date();
@@ -68,6 +70,7 @@ message:any;
   
    this.isFetching=false;
    this.getadmindetails();
+   this.getownerdetails();
    this.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm');
    
     const userId = this.route.snapshot.params['userId'];
@@ -122,7 +125,31 @@ message:any;
     });
 
   }
+  public addPaymentsowner(){
+    let payment={ 
+      "name":this.name,
+    "date":this.date,
+    "amount":this.amount,
+    "arrears":this.arrears,
+    "slip":this.slip,
+    "month":this.month
+  }
+    // this.service.savepayments(payment).subscribe((data)=>{
+    //   alert('book added');
+    //   location.reload();
+    // });
+    const formData = new FormData();
+    formData.append('payment', JSON.stringify(payment));
+    if (this.selectedImage) {
+      formData.append('image', this.selectedImage);
+    }
+  
+    this.service.saveownerpayments(formData).subscribe((data) => {
+      alert('Payment added');
+      location.reload();
+    });
 
+  }
   public addadminaccount(){
     let p={ 
       "account_Number":this.Account_Number,
@@ -156,6 +183,11 @@ message:any;
   }
   public updateadminaccountdetails(){
     this.service.adminaccountupdate(this.adminAccountToUpdate).subscribe(()=>{
+      alert(' updated successfully');
+    })
+  }
+  public updateowneraccountdetails(){
+    this.service.owneraccountupdate(this.ownerAccountToUpdate).subscribe(()=>{
       alert(' updated successfully');
     })
   }
@@ -231,12 +263,20 @@ message:any;
       this.admindetails=data;
     })
   }
+  public getownerdetails(){
+    this.service.owneraccount().subscribe((data)=>{
+      this.ownerdetails=data;
+    })
+  }
 
   public edit(id: number) {
     this.paymentToUpdate = this.boardingmatepayments.find((payment: { id: number; }) => payment.id === id);
 }
   public editAdminDetail(id:number){
     this.adminAccountToUpdate = this.admindetails.find((adminaccount: { id: number; }) => adminaccount.id === id);
+  }
+  public editOwnerDetail(id:number){
+    this.ownerAccountToUpdate = this.ownerdetails.find((owneraccount: { id: number; }) => owneraccount.id === id);
   }
   onImageSelected(event: any) {
     this.selectedImage = event.target.files[0];
